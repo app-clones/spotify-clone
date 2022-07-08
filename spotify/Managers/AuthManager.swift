@@ -8,9 +8,9 @@
 import Foundation
 
 final class AuthManager {
-    static let shared = AuthManager()
+    // MARK: - Public Variables
 
-    private var refreshingToken = false
+    static let shared = AuthManager()
 
     enum Constants {
         static let clientId = "487fd136ed604a66af0f91a5cb21f369"
@@ -28,7 +28,31 @@ final class AuthManager {
         return URL(string: string)
     }
 
+    // MARK: - Private Variables
+
+    private var refreshingToken = false
+
+    private var onRefreshBlocks = [(String) -> Void]()
+
+    var isSignedIn: Bool {
+        return accessToken != nil
+    }
+
+    private var accessToken: String? {
+        return UserDefaults.standard.string(forKey: "access_token")
+    }
+
+    private var refreshToken: String? {
+        return UserDefaults.standard.string(forKey: "refresh_token")
+    }
+
+    private var tokenExpirationDate: Date? {
+        return UserDefaults.standard.object(forKey: "expiration_date") as? Date
+    }
+
     private init() {}
+
+    // MARK: - Public
 
     public func exchangeCodeForToken(code: String, completion: @escaping ((Bool) -> Void)) {
         // Get token
@@ -79,8 +103,6 @@ final class AuthManager {
         }
         task.resume()
     }
-
-    private var onRefreshBlocks = [(String) -> Void]()
 
     /// Supplies valid token to be used with API Calls
     public func withValidToken(completion: @escaping (String) -> Void) {
@@ -168,6 +190,8 @@ final class AuthManager {
         task.resume()
     }
 
+    // MARK: - Private Functions
+
     private func cacheToken(result: AuthResponse) {
         UserDefaults.standard.setValue(result.access_token, forKey: "access_token")
 
@@ -177,22 +201,6 @@ final class AuthManager {
 
         UserDefaults.standard.setValue(Date().addingTimeInterval(TimeInterval(result.expires_in)),
                                        forKey: "expiration_date")
-    }
-
-    var isSignedIn: Bool {
-        return accessToken != nil
-    }
-
-    private var accessToken: String? {
-        return UserDefaults.standard.string(forKey: "access_token")
-    }
-
-    private var refreshToken: String? {
-        return UserDefaults.standard.string(forKey: "refresh_token")
-    }
-
-    private var tokenExpirationDate: Date? {
-        return UserDefaults.standard.object(forKey: "expiration_date") as? Date
     }
 
     private var shouldRefreshToken: Bool {

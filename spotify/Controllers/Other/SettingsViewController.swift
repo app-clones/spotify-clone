@@ -8,6 +8,8 @@
 import UIKit
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    // MARK: - Private Variables
+
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
 
@@ -18,6 +20,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }()
 
     private var sections = [Section]()
+
+    // MARK: - Private Functions
 
     override func viewDidLoad() {
         super.viewDidLoad()

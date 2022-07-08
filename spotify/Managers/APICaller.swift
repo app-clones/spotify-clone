@@ -10,6 +10,8 @@ import Foundation
 final class APICaller {
     static let shared = APICaller()
 
+    // MARK: - Private Variables
+
     enum Constants {
         static let baseAPIUrl = "https://api.spotify.com/v1"
     }
@@ -19,6 +21,8 @@ final class APICaller {
     }
 
     private init() {}
+
+    // MARK: - Public Functions
 
     public func getCurrentUserProfile(completion: @escaping (Result<UserProfile, Error>) -> Void) {
         createRequest(
@@ -42,7 +46,7 @@ final class APICaller {
         }
     }
 
-    // MARK: - Private
+    // MARK: - Private Functions
 
     enum HTTPMethod: String {
         case GET

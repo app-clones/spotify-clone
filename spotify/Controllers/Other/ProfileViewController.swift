@@ -9,6 +9,8 @@ import SDWebImage
 import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    // MARK: - Private Variables
+
     private let tableView: UITableView = {
         let tableView = UITableView()
 
@@ -20,6 +22,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }()
 
     private var models = [String]()
+
+    // MARK: - Private Functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
