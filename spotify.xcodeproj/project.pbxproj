@@ -30,6 +30,8 @@
 		1182F3192877770200E45528 /* AudioTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1182F3182877770200E45528 /* AudioTrack.swift */; };
 		1182F31B2877770A00E45528 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1182F31A2877770A00E45528 /* Artist.swift */; };
 		1182F31D2877771400E45528 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1182F31C2877771400E45528 /* UserProfile.swift */; };
+		1182F31F2877875600E45528 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1182F31E2877875600E45528 /* Extensions.swift */; };
+		1182F321287797B600E45528 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1182F320287797B600E45528 /* AuthResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		1182F3182877770200E45528 /* AudioTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTrack.swift; sourceTree = "<group>"; };
 		1182F31A2877770A00E45528 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		1182F31C2877771400E45528 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		1182F31E2877875600E45528 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		1182F320287797B600E45528 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,7 @@
 				1182F3182877770200E45528 /* AudioTrack.swift */,
 				1182F31A2877770A00E45528 /* Artist.swift */,
 				1182F31C2877771400E45528 /* UserProfile.swift */,
+				1182F320287797B600E45528 /* AuthResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 				1182F2DD2877739800E45528 /* AppDelegate.swift */,
 				1182F2DF2877739800E45528 /* SceneDelegate.swift */,
 				1182F2E62877739800E45528 /* Assets.xcassets */,
+				1182F31E2877875600E45528 /* Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -269,11 +275,13 @@
 				1182F3092877767100E45528 /* ProfileViewController.swift in Sources */,
 				1182F2FB287775E800E45528 /* TabBarViewController.swift in Sources */,
 				1182F2E22877739800E45528 /* HomeViewController.swift in Sources */,
+				1182F321287797B600E45528 /* AuthResponse.swift in Sources */,
 				1182F315287776DE00E45528 /* HapticsManager.swift in Sources */,
 				1182F3192877770200E45528 /* AudioTrack.swift in Sources */,
 				1182F3032877764400E45528 /* AuthViewController.swift in Sources */,
 				1182F2DE2877739800E45528 /* AppDelegate.swift in Sources */,
 				1182F2FF2877761C00E45528 /* LibraryViewController.swift in Sources */,
+				1182F31F2877875600E45528 /* Extensions.swift in Sources */,
 				1182F30D2877768A00E45528 /* PlaylistViewController.swift in Sources */,
 				1182F31B2877770A00E45528 /* Artist.swift in Sources */,
 				1182F2E02877739800E45528 /* SceneDelegate.swift in Sources */,
@@ -424,7 +432,6 @@
 				INFOPLIST_FILE = spotify/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -452,7 +459,6 @@
 				INFOPLIST_FILE = spotify/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -15,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let window = UIWindow(frame: UIScreen.main.bounds)
+
+//        UserDefaults.standard.set(nil, forKey: "access_token");
+//        UserDefaults.standard.set(nil, forKey: "refresh_token");
+//        UserDefaults.standard.set(nil, forKey: "expiration_date");
         
         if AuthManager.shared.isSignedIn {
             window.rootViewController = TabBarViewController()
