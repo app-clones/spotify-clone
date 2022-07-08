@@ -20,14 +20,19 @@ final class APICaller {
         case failedToGetData
     }
 
+    enum HTTPMethod: String {
+        case GET
+        case POST
+    }
+
     private init() {}
 
     // MARK: - Public Functions
 
     public func getCurrentUserProfile(completion: @escaping (Result<UserProfile, Error>) -> Void) {
         createRequest(
-            with: URL(string: Constants.baseAPIUrl + "/me"),
-            type: .GET
+            with: constructURL(endpoint: "/me"),
+            type: HTTPMethod.GET
         ) { baseRequest in
             let task = URLSession.shared.dataTask(with: baseRequest) { data, _, error in
                 guard let data = data, error == nil else {
@@ -46,11 +51,99 @@ final class APICaller {
         }
     }
 
+    public func getNewReleases(completion: @escaping (Result<NewReleasesResponse, Error>) -> Void) {
+        createRequest(
+            with: constructURL(endpoint: "/browse/new-releases?limit=50"),
+            type: HTTPMethod.GET
+        ) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.failedToGetData))
+                    return
+                }
+
+                do {
+                    let result = try JSONDecoder().decode(NewReleasesResponse.self, from: data)
+                    completion(.success(result))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+
+    public func getFeaturedPlaylists(completion: @escaping ((Result<FeaturedPlaylistsResponse, Error>) -> Void)) {
+        createRequest(
+            with: constructURL(endpoint: "/browse/featured-playlists?limit=2"),
+            type: HTTPMethod.GET
+        ) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.failedToGetData))
+                    return
+                }
+
+                do {
+                    let result = try JSONDecoder().decode(FeaturedPlaylistsResponse.self, from: data)
+                    completion(.success(result))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+
+    public func getRecommendedGenres(completion: @escaping ((Result<RecommendedGenresResponse, Error>) -> Void)) {
+        createRequest(
+            with: constructURL(endpoint: "/recommendations/available-genre-seeds"),
+            type: HTTPMethod.GET
+        ) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.failedToGetData))
+                    return
+                }
+
+                do {
+                    let result = try JSONDecoder().decode(RecommendedGenresResponse.self, from: data)
+                    completion(.success(result))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+
+    public func getRecommendations(genres: Set<String>, completion: @escaping ((Result<RecommendationsResponse, Error>) -> Void)) {
+        let seeds = genres.joined(separator: ",")
+        createRequest(
+            with: constructURL(endpoint: "/recommendations?limit=40&seed_genres=\(seeds)"),
+            type: HTTPMethod.GET
+        ) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.failedToGetData))
+                    return
+                }
+
+                do {
+                    let result = try JSONDecoder().decode(RecommendationsResponse.self, from: data)
+                    completion(.success(result))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+
     // MARK: - Private Functions
 
-    enum HTTPMethod: String {
-        case GET
-        case POST
+    private func constructURL(endpoint: String) -> URL {
+        return URL(string: Constants.baseAPIUrl + endpoint)!
     }
 
     private func createRequest(
